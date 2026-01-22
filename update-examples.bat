@@ -4,7 +4,7 @@ REM Run this when your instructor announces new content
 
 REM ============================================================
 REM INSTRUCTOR: Replace this URL with your template repository
-set UPSTREAM_URL=https://github.com/INSTRUCTOR/REPO-NAME.git
+set UPSTREAM_URL=https://github.com/john-dempsey/web-development-template.git
 REM ============================================================
 
 REM Check if upstream remote exists, add it if not
