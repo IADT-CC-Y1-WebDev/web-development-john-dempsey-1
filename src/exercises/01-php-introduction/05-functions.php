@@ -25,6 +25,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function celsiusToFahrenheit($celsius) {
+            return ($celsius * 9/5) + 32;
+        }
+        // Test the function with a few values
+        $tempsC = [0, 20, 37, 100];
+        foreach ($tempsC as $tempC) {
+            $tempF = celsiusToFahrenheit($tempC);
+            echo "$tempC °C is equal to $tempF °F<br>";
+        }
         ?>
     </div>
 
@@ -41,6 +50,17 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function calculateRectangleArea($width, $height = null) {
+            if ($height === null) {
+                $height = $width; // Assume it's a square
+            }
+            return $width * $height;
+        }
+        // Test the function with a rectangle and a square
+        $area1 = calculateRectangleArea(5, 10); // Rectangle
+        $area2 = calculateRectangleArea(7); // Square
+        echo "Area of rectangle (5x10): $area1<br>";
+        echo "Area of square (7x7): $area2<br>";
         ?>
     </div>
 
@@ -57,6 +77,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function checkEvenOdd($number) {
+            return ($number % 2 === 0) ? "Even" : "Odd";
+        }
+        // Test the function with a few numbers
+        $numbers = [1, 2, 3, 4, 5, 10, 15];
+        foreach ($numbers as $num) {
+            $result = checkEvenOdd($num);
+            echo "$num is $result<br>";
+        }
         ?>
     </div>
 
@@ -73,6 +102,18 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function getArrayStats($numbers) {
+            $min = min($numbers);
+            $max = max($numbers);
+            $average = array_sum($numbers) / count($numbers);
+            return [$min, $max, $average];
+        }
+        // Test the function with an array of numbers
+        $numArray = [5, 10, 15, 20, 25];
+        list($min, $max, $avg) = getArrayStats($numArray);
+        echo "Minimum: $min<br>";
+        echo "Maximum: $max<br>";
+        echo "Average: $avg<br>";
         ?>
     </div>
 

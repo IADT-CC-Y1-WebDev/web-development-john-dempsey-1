@@ -27,6 +27,18 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $age = rand(0, 100); // Example age, you can change this value
+        if ($age >= 0 && $age <= 12) {
+            echo "Age: $age - Child";
+        } elseif ($age >= 13 && $age <= 19) {
+            echo "Age: $age - Teenager";
+        } elseif ($age >= 20 && $age <= 64) {
+            echo "Age: $age - Adult";
+        } elseif ($age >= 65) {
+            echo "Age: $age - Senior";
+        } else {
+            echo "Invalid age.";
+        }
         ?>
     </div>
 
@@ -43,6 +55,32 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $dayOfWeek = rand(1, 7); // Example day, you can change this value
+        switch ($dayOfWeek) {
+            case 1:
+                echo "Day: $dayOfWeek - Monday (Weekday)";
+                break;
+            case 2:
+                echo "Day: $dayOfWeek - Tuesday (Weekday)";
+                break;
+            case 3:
+                echo "Day: $dayOfWeek - Wednesday (Weekday)";
+                break;
+            case 4:
+                echo "Day: $dayOfWeek - Thursday (Weekday)";
+                break;
+            case 5:
+                echo "Day: $dayOfWeek - Friday (Weekday)";
+                break;
+            case 6:
+                echo "Day: $dayOfWeek - Saturday (Weekend)";
+                break;
+            case 7:
+                echo "Day: $dayOfWeek - Sunday (Weekend)";
+                break;
+            default:
+                echo "Invalid day.";
+        }
         ?>
     </div>
 
@@ -58,6 +96,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $number = rand(1, 10); // Example number, you can change this value
+        echo "Multiplication Table for $number:<br>";
+        for ($i = 1; $i <= 10; $i++) {
+            $result = $number * $i;
+            echo "$number × $i = $result<br>";
+        }
         ?>
     </div>
 
@@ -73,6 +117,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $countdown = 10; // Starting point
+        while ($countdown >= 0) {
+            if ($countdown > 0) {
+                echo "$countdown...<br>";
+            } else {
+                echo "Blast off!";
+            }
+            $countdown--;
+        }
         ?>
     </div>
 

@@ -27,6 +27,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $firstName = "Joe";
+        $lastName = "Bloggs";
+        $age = 30;
+        $city = "Dublin";
+
+        echo "My name is $firstName $lastName, I am $age years old and I live in $city.";
         ?>
     </div>
 
@@ -44,6 +50,25 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $price1 = 10.00;
+        $quantity1 = 2;
+
+        $price2 = 5.50;
+        $quantity2 = 3;
+
+        $price3 = 20.00;
+        $quantity3 = 1;
+
+        $subtotal1 = $price1 * $quantity1;
+        $subtotal2 = $price2 * $quantity2;
+        $subtotal3 = $price3 * $quantity3;
+
+        $totalCost = $subtotal1 + $subtotal2 + $subtotal3;
+        $discount = 0.10; // 10% discount
+        $finalPrice = $totalCost * (1 - $discount);
+
+        echo "Total Cost: $" . number_format($totalCost, 2) . "<br>";
+        echo "Final Price after 10% discount: $" . number_format($finalPrice, 2);
         ?>
     </div>
 
@@ -59,6 +84,13 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $isStudent = true;
+        $hasDiscount = false;
+        $isPremiumMember = true;
+
+        echo "Is Student: " . ($isStudent ? "Yes" : "No") . "<br>";
+        echo "Has Discount: " . ($hasDiscount ? "Yes" : "No") . "<br>";
+        echo "Is Premium Member: " . ($isPremiumMember ? "Yes" : "No");
         ?>
     </div>
 
