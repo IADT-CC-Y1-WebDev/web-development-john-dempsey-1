@@ -32,7 +32,10 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        $student1 = new Student("Alice", "S12345");
+        $student2 = new Student("Bob", "S23456");
         ?>
     </div>
 
@@ -52,7 +55,10 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        $student = new Student("Charlie", "S34567");
+        echo $student; // This will call __toString()
         ?>
     </div>
 
@@ -73,7 +79,42 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        $students = [
+            new Student("Denise", "S45678"),
+            new Student("Edward", "S56789"),
+            new Student("Fiona", "S67890")
+        ];
+        foreach ($students as $student) {
+            echo $student . "<br>";
+        }
+        ?>
+    </div>
+
+    <!-- Exercise 4 -->
+    <h2>Exercise 4: Add __destruct()</h2>
+    <p>
+        <strong>Task:</strong>
+        Add a <code>__destruct()</code> method to your Student class that prints
+        "Student [name] has left the system" when the object is destroyed.
+    </p>
+    <p>
+        Create two students, then set one of them to <code>null</code>. Observe when
+        the destructor messages appear. Notice that the second student's destructor
+        is called automatically when the script ends.
+    </p>
+
+    <p class="output-label">Output:</p>
+    <div class="output">
+        <?php
+        // TODO: Write your solution here
+        require_once __DIR__ . '/classes/Student.php';
+        $student3 = new Student("George", "S78901");
+        $student4 = new Student("Hilary", "S89012");
+        echo "Setting student3 to null...<br>";
+        $student3 = null;
+        echo "Script ending...<br>";
         ?>
     </div>
 

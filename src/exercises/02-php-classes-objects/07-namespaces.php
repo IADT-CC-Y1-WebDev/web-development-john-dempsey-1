@@ -35,9 +35,9 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/College/Student.php';
-        // $student = new \College\Student("Alice", "C12345");
-        // echo $student;
+        require_once __DIR__ . '/classes/College/Student.php';
+        $student = new \College\Student("Alice", "C12345");
+        echo $student;
         ?>
     </div>
 
@@ -54,10 +54,10 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/College/Student.php';
-        // use College\Student;
-        // $student = new Student("Bob", "C12346");
-        // echo $student;
+        require_once __DIR__ . '/classes/College/Student.php';
+        use College\Student;
+        $student = new Student("Bob", "C12346");
+        echo $student;
         ?>
     </div>
 
@@ -69,7 +69,6 @@
     <ol>
         <li>Copy <code>Undergrad.php</code> and <code>Postgrad.php</code> into the <code>classes/College/</code> folder</li>
         <li>Add <code>namespace College;</code> to each file</li>
-        <li>Remove the <code>require_once</code> statements from these files (they won't work with namespaces - we'll fix this with autoloading in the next exercise)</li>
     </ol>
     <p>
         Require all three files and use <code>use</code> statements to import them.
@@ -80,12 +79,19 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/College/Student.php';
-        // require_once __DIR__ . '/classes/College/Undergrad.php';
-        // require_once __DIR__ . '/classes/College/Postgrad.php';
+        require_once __DIR__ . '/classes/College/Student.php';
+        require_once __DIR__ . '/classes/College/Undergrad.php';
+        require_once __DIR__ . '/classes/College/Postgrad.php';
         // use College\Student;
-        // use College\Undergrad;
-        // use College\Postgrad;
+        use College\Undergrad;
+        use College\Postgrad;
+
+        $s1 = new Student("Charlie", "C12347");
+        $s2 = new Undergrad("Dave", "C12348", "Computer Science", 3);
+        $s3 = new Postgrad("Eve", "C12349", "Dr. Smith", "AI Research");
+        echo $s1 . "<br>";
+        echo $s2 . "<br>";
+        echo $s3 . "<br>";
         ?>
     </div>
 

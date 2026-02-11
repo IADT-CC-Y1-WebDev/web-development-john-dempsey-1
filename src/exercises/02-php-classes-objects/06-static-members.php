@@ -36,7 +36,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        echo "Student count: " . Student::getCount() . "<br>";
+        $s1 = new Student("Alice", "S001");
+        echo "Student count: " . Student::getCount() . "<br>";
+        $s2 = new Student("Bob", "S002");
+        echo "Student count: " . Student::getCount() . "<br>";
+        $s3 = new Student("Charlie", "S003");
+        echo "Student count: " . Student::getCount() . "<br>";
         ?>
     </div>
 
@@ -52,12 +60,40 @@
         <li>A public static method <code>findAll()</code> that returns the <code>$students</code> array</li>
         <li>A public static method <code>findByNumber($num)</code> that returns the student with that number, or null if not found</li>
     </ul>
+    <p>
+        In Exercise 1, the static <code>$counter</code> property was added to keep a count the number of students. This property is now redundant because
+        we can simply use <code>count(Student::findAll())</code> to get the number of students. Modify your <code>Student</code> class as follows:
+    </p>
+    <ul>
+        <li>Remove the static <code>$count</code> property</li>
+        <li>Remove the increment of <code>self::$count</code> from the constructor</li>
+        <li>rewrite <code>getCount()</code> to return the count of students using <code>count(self::$students)</code>.
+    </ul>
+    <p>
+        Create three students and then use <code>Student::findAll()</code> to display
+        all students. Use <code>Student::findByNumber()</code> to find a specific
+        student by their number and display that student.
+    </p>
 
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+        $s4 = new Student("David", "S004");
+        $s5 = new Student("Eve", "S005");
+        $s6 = new Student("Frank", "S006");
+        echo "All students:<br>";
+        foreach (Student::findAll() as $student) {
+            echo $student . "<br>";
+        }
+        echo "Find by number S005:<br>";
+        $found = Student::findByNumber("S005");
+        if ($found) {
+            echo $found . "<br>";
+        } else {
+            echo "Student not found.<br>";
+        }
         ?>
     </div>
 
@@ -78,8 +114,60 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Undergrad.php';
-        // require_once __DIR__ . '/classes/Postgrad.php';
+        require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Undergrad.php';
+        require_once __DIR__ . '/classes/Postgrad.php';
+
+        $s7 = new Undergrad("Grace", "S007", "Computer Science", 2);
+        $s8 = new Postgrad("Heidi", "S008", "Dr. Smith", "AI Research");
+        echo "All students:<br>";
+        foreach (Student::findAll() as $student) {
+            echo $student . "<br>";
+        }
+        echo "Find by number S008:<br>";
+        $found = Student::findByNumber("S008");
+        if ($found) {
+            echo $found . "<br>";
+        } else {
+            echo "Student not found.<br>";
+        }
+        ?>
+    </div>
+
+    <!-- Exercise 4 -->
+    <h2>Exercise 4: Removing from Registry</h2>
+    <p>
+        <strong>Task:</strong>
+        Add the following to your <code>Student</code> class:
+    </p>
+    <ul>
+        <li>A <code>leave()</code> method that removes the student from the static <code>$students</code> array using <code>unset(self::$students[$this->number])</code></li>
+        <li>A <code>__destruct()</code> method that prints "Student [name] has been destroyed"</li>
+    </ul>
+    <p>
+        Create three students, display the count, then call <code>leave()</code> and <code>unset()</code>
+        on one student. Display the count again to confirm they were removed.
+    </p>
+    <p>
+        <strong>Why both methods?</strong> The static array holds a reference to each object.
+        PHP only calls <code>__destruct()</code> when <em>all</em> references are gone, so we must
+        call <code>leave()</code> first to remove from the array, then <code>unset()</code> to
+        trigger <code>__destruct()</code>.
+    </p>
+
+    <p class="output-label">Output:</p>
+    <div class="output">
+        <?php
+        // TODO: Write your solution here
+        require_once __DIR__ . '/classes/Student.php';
+
+        $s9 = new Student("Ivan", "S009");
+        $s10 = new Student("Judy", "S010");
+        $s11 = new Student("Karl", "S011");
+        echo "Student count: " . Student::getCount() . "<br>";
+        $s10->leave();
+        unset($s10);
+        echo "Student count: " . Student::getCount() . "<br>";
         ?>
     </div>
 

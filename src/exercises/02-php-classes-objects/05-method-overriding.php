@@ -32,7 +32,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Undergrad.php';
+        require_once __DIR__ . '/classes/Undergrad.php';
+
+        $student = new Student("Alice", "S12345");
+        $undergrad = new Undergrad("Bob", "U67890", "Computer Science", 2);
+        echo $student . "<br>";
+        echo $undergrad . "<br>";
         ?>
     </div>
 
@@ -51,12 +56,19 @@
         <li>Have getter methods for supervisor and topic</li>
         <li>Override <code>__toString()</code> to return "Postgrad: [name] ([number]), Supervisor: [supervisor], Topic: [topic]"</li>
     </ul>
+    <p>
+        Create a Postgrad object and echo it to see the output from your overridden
+        <code>__toString()</code> method.
+    </p>
 
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Postgrad.php';
+        require_once __DIR__ . '/classes/Postgrad.php';
+
+        $postgrad = new Postgrad("Charlie", "P54321", "Dr. Smith", "AI Research");
+        echo $postgrad . "<br>";
         ?>
     </div>
 
@@ -73,8 +85,18 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Undergrad.php';
-        // require_once __DIR__ . '/classes/Postgrad.php';
+        require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Undergrad.php';
+        require_once __DIR__ . '/classes/Postgrad.php';
+
+        $students = [
+            new Student("Diana", "S23456"),
+            new Undergrad("Eddie", "U78901", "Visual Design", 2),
+            new Postgrad("Flo", "P43210", "Dr. Jones", "Medical Research")
+        ];
+        foreach ($students as $s) {
+            echo $s . "<br>";
+        }
         ?>
     </div>
 

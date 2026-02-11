@@ -33,8 +33,16 @@
         // TODO: Write your solution here
         // Step 1: Create classes/Student.php with a Student class
         // Step 2: Require the file
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
         // Step 3: Create a student and display their details
+        // $student = new Student();
+        // $student->name = "Alice";
+        // $student->number = "S12345";
+        $student = new Student("Alice", "S12345");
+        // echo "Student Name: " . $student->name . "<br>";
+        // echo "Student Number: " . $student->number . "<br>";
+        echo "Student Name: " . $student->getName() . "<br>";
+        echo "Student Number: " . $student->getNumber() . "<br>";
         ?>
     </div>
 
@@ -54,7 +62,13 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+        $student1 = new Student("Bob", "S23456");
+        $student2 = new Student("Cheryl", "S34567");
+        // echo "Student 1 - Name: " . $student1->name . ", Number: " . $student1->number . "<br>";
+        // echo "Student 2 - Name: " . $student2->name . ", Number: " . $student2->number . "<br>";
+        echo "Student 1 - Name: " . $student1->getName() . ", Number: " . $student1->getNumber() . "<br>";
+        echo "Student 2 - Name: " . $student2->getName() . ", Number: " . $student2->getNumber() . "<br>";
         ?>
     </div>
 
@@ -74,7 +88,9 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+        $student = new Student("David", "S45678");
+        echo "Student " . $student->getName() . " has number " . $student->getNumber() . "<br>";
         ?>
     </div>
 

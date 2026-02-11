@@ -38,16 +38,16 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // spl_autoload_register(function ($class) {
-        //     $path = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-        //     $file = __DIR__ . '/classes/' . $path . '.php';
-        //     if (file_exists($file)) {
-        //         require_once $file;
-        //     }
-        // });
-        // use College\Student;
-        // $student = new Student("Alice", "C12345");
-        // echo $student;
+        spl_autoload_register(function ($class) {
+            $path = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+            $file = __DIR__ . '/classes/' . $path . '.php';
+            if (file_exists($file)) {
+                require_once $file;
+            }
+        });
+        use College\Student;
+        $student = new Student("Alice", "C12345");
+        echo $student;
         ?>
     </div>
 
@@ -65,10 +65,17 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/etc/config.php';
+        require_once __DIR__ . '/etc/config.php';
         // use College\Student;
-        // use College\Undergrad;
-        // use College\Postgrad;
+        use College\Undergrad;
+        use College\Postgrad;
+
+        $s1 = new Student("Bob", "C23456");
+        $s2 = new Undergrad("Charlie", "C34567", "Computer Science", 2);
+        $s3 = new Postgrad("Dave", "C45678", "Data Science", "Dr. Smith");
+        echo $s1 . "<br>";
+        echo $s2 . "<br>";
+        echo $s3 . "<br>";
         ?>
     </div>
 
@@ -93,6 +100,26 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        require_once __DIR__ . '/etc/config.php';
+        // use College\Student;
+        // use College\Undergrad;
+        // use College\Postgrad;
+
+        $s4 = new Student("Eve", "C56789");
+        $s5 = new Undergrad("Frank", "C67890", "Mathematics", 3);
+        $s6 = new Postgrad("Grace", "C78901", "Physics", "Dr. Johnson");
+
+        echo "All students:<br>";
+        foreach (Student::findAll() as $student) {
+            echo $student . "<br>";
+        }
+        echo "Find by number C67890:<br>";
+        $found = Student::findByNumber("C67890");
+        if ($found) {
+            echo $found . "<br>";
+        } else {
+            echo "Student not found.<br>";
+        }
         ?>
     </div>
 
