@@ -60,7 +60,7 @@ try {
         'isbn' => $_POST['isbn'] ?? '',
         'format_ids' => $_POST['format_ids'] ?? [],
         'description' => $_POST['description'] ?? '',
-        'cover' => $_POST['cover'] ?? null
+        'cover' => $_FILES['cover'] ?? null
     ];
     // dd($data);
 
@@ -80,7 +80,7 @@ try {
         'isbn' => 'required|min:13|max:13',
         'format_ids' => 'required|array|integer',
         'description' => 'required|max:1000',
-        'cover' => 'required' // |file|image|mimes:jpg,jpeg,png|max_file_size:2097152'
+        'cover' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:2097152'
     ];
     $validator = new Validator($data, $rules);
     if ($validator->fails()) {

@@ -76,7 +76,7 @@ $formats = [
     <!-- See: /examples/04-php-forms/step-09-file-uploads/                   -->
     <!-- =================================================================== -->
     <!-- TODO: Add enctype="multipart/form-data" to enable file uploads      -->
-    <form action="book_store.php" method="POST">
+    <form action="book_store.php" method="POST" enctype="multipart/form-data">
 
         <!-- =============================================================== -->
         <!-- Book Title Field                                                -->
