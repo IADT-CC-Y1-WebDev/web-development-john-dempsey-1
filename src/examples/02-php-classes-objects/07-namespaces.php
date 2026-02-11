@@ -10,6 +10,7 @@
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
+        <a href="/exercises/02-php-classes-objects/07-namespaces.php">Go to Exercise &rarr;</a>
     </div>
 
     <h1>Namespaces</h1>

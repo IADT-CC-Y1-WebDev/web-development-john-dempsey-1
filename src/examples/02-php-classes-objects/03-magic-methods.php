@@ -10,6 +10,7 @@
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
+        <a href="/exercises/02-php-classes-objects/03-magic-methods.php">Go to Exercise &rarr;</a>
     </div>
 
     <h1>Magic Methods</h1>
@@ -114,8 +115,61 @@ echo $account;</code></pre>
     </div>
 
     <!-- Example 3 -->
+    <h2>__destruct() - The Destructor</h2>
+    <p>The <code>__destruct()</code> method is called automatically when an object is destroyed. This happens when the object is set to <code>null</code>, goes out of scope, or when the script ends.</p>
+    <pre><code class="language-php">class BankAccount {
+    protected $name;
+
+    public function __construct($name) {
+        echo "Opening account for $name&lt;br&gt;";
+        $this->name = $name;
+    }
+
+    public function __destruct() {
+        echo "Closing account for {$this->name}&lt;br&gt;";
+    }
+}
+
+echo "Creating accounts...&lt;br&gt;";
+$acc1 = new BankAccount("Alice");
+$acc2 = new BankAccount("Bob");
+
+echo "&lt;br&gt;Setting acc1 to null...&lt;br&gt;";
+$acc1 = null;  // __destruct() called here
+
+echo "&lt;br&gt;Script ending...&lt;br&gt;";
+// __destruct() for acc2 called automatically when script ends</code></pre>
+
+    <p class="output-label">Output:</p>
+    <div class="output">
+        <?php
+        class BankAccountDestruct {
+            protected $name;
+
+            public function __construct($name) {
+                echo "Opening account for $name<br>";
+                $this->name = $name;
+            }
+
+            public function __destruct() {
+                echo "Closing account for {$this->name}<br>";
+            }
+        }
+
+        echo "Creating accounts...<br>";
+        $accA = new BankAccountDestruct("Alice");
+        $accB = new BankAccountDestruct("Bob");
+
+        echo "<br>Setting acc1 to null...<br>";
+        $accA = null;
+
+        echo "<br>Script ending...<br>";
+        ?>
+    </div>
+
+    <!-- Example 4 -->
     <h2>Using the BankAccount Class File</h2>
-    <p>Our <code>BankAccount</code> class in the classes folder includes both <code>__construct()</code> and <code>__toString()</code> methods.</p>
+    <p>Our <code>BankAccount</code> class in the classes folder includes <code>__construct()</code> and <code>__toString()</code> methods.</p>
     <pre><code class="language-php">require_once __DIR__ . '/classes/v1/BankAccount.php';
 
 $account1 = new BankAccount("1111111111", "Charlie", 100.00);
@@ -142,7 +196,7 @@ echo "&lt;p&gt;First account: " . $account1 . "&lt;/p&gt;";</code></pre>
         ?>
     </div>
 
-    <!-- Example 4 -->
+    <!-- Example 5 -->
     <h2>Common Magic Methods</h2>
     <p>PHP has many magic methods. Here are some of the most commonly used:</p>
     <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">

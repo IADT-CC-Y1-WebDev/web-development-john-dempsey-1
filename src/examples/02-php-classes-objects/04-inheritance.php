@@ -10,6 +10,7 @@
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
+        <a href="/exercises/02-php-classes-objects/04-inheritance.php">Go to Exercise &rarr;</a>
     </div>
 
     <h1>Inheritance</h1>

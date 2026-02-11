@@ -10,6 +10,7 @@
 <body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Classes &amp; Objects</a>
+        <a href="/exercises/02-php-classes-objects/06-static-members.php">Go to Exercise &rarr;</a>
     </div>
 
     <h1>Static Members</h1>
@@ -206,6 +207,157 @@ echo $found;</code></pre>
     </div>
 
     <!-- Example 4 -->
+    <h2>Removing Objects from the Registry</h2>
+    <p>
+        When an object is destroyed, we should remove it from the registry to keep it accurate. 
+        You might think we could do this in <code>__destruct()</code>, but there's a problem.
+    </p>
+
+    <h3>Why __destruct() Alone Doesn't Work</h3>
+    <p>
+        When you create an object and store it in a variable, that variable holds a 
+        <strong>reference</strong> (like a bookmark) pointing to the object in memory:
+    </p>
+    <pre><code class="language-php">$acc = new BankAccount("111", "Alice", 100);
+// $acc now holds a reference to the Alice object</code></pre>
+
+    <p>
+        When the constructor also adds <code>$this</code> to the static array, the array 
+        holds a <strong>second reference</strong> to the same object:
+    </p>
+    <pre><code class="language-php">self::$accounts[$num] = $this;
+// Now BOTH $acc AND the array point to the Alice object</code></pre>
+
+    <p>
+        PHP only calls <code>__destruct()</code> when <strong>all references</strong> to an 
+        object are gone. So if you call <code>unset($acc)</code>, you only remove one 
+        reference &mdash; the array still has its reference, so the object stays alive 
+        and <code>__destruct()</code> is never called.
+    </p>
+
+    <p>
+        The solution is to add a <code>close()</code> method that removes the object from 
+        the array first. Then when you call <code>unset()</code>, the last reference is 
+        removed and <code>__destruct()</code> is finally called.
+    </p>
+    <pre><code class="language-php">class BankAccount {
+    private static $accounts = [];
+
+    protected $number;
+    protected $name;
+    protected $balance;
+
+    public function __construct($num, $name, $bal) {
+        $this->number = $num;
+        $this->name = $name;
+        $this->balance = $bal;
+
+        // Add to registry
+        self::$accounts[$num] = $this;
+        echo "Opened account for {$this->name}&lt;br&gt;";
+    }
+
+    public function close() {
+        // Remove from registry - this allows __destruct to be called
+        unset(self::$accounts[$this->number]);
+        echo "Account closed for {$this->name}&lt;br&gt;";
+    }
+
+    public function __destruct() {
+        echo "Account destroyed for {$this->name}&lt;br&gt;";
+    }
+
+    public static function findAll() {
+        return self::$accounts;
+    }
+
+    public static function count() {
+        return count(self::$accounts);
+    }
+
+    public function __toString() {
+        return "Account {$this->number}: {$this->name}, &amp;euro;{$this->balance}";
+    }
+}
+
+// Create accounts
+$acc1 = new BankAccount("111", "Alice", 100);
+$acc2 = new BankAccount("222", "Bob", 200);
+$acc3 = new BankAccount("333", "Charlie", 300);
+
+echo "&lt;br&gt;Accounts in registry: " . BankAccount::count() . "&lt;br&gt;&lt;br&gt;";
+
+// Close one account - must call close() then unset()
+echo "Closing Bob's account...&lt;br&gt;";
+$acc2-&gt;close();  // Remove from registry
+unset($acc2);    // Now __destruct() is called
+
+echo "&lt;br&gt;Accounts remaining: " . BankAccount::count() . "&lt;br&gt;";
+foreach (BankAccount::findAll() as $account) {
+    echo $account . "&lt;br&gt;";
+}</code></pre>
+
+    <p class="output-label">Output:</p>
+    <div class="output">
+        <?php
+        class BankAccountWithDestruct {
+            private static $accounts = [];
+
+            protected $number;
+            protected $name;
+            protected $balance;
+
+            public function __construct($num, $name, $bal) {
+                $this->number = $num;
+                $this->name = $name;
+                $this->balance = $bal;
+
+                self::$accounts[$num] = $this;
+                echo "Opened account for {$this->name}<br>";
+            }
+
+            public function close() {
+                unset(self::$accounts[$this->number]);
+                echo "Account closed for {$this->name}<br>";
+            }
+
+            public function __destruct() {
+                echo "Account destroyed for {$this->name}<br>";
+            }
+
+            public static function findAll() {
+                return self::$accounts;
+            }
+
+            public static function count() {
+                return count(self::$accounts);
+            }
+
+            public function __toString() {
+                return "Account {$this->number}: {$this->name}, &euro;{$this->balance}";
+            }
+        }
+
+        $acc1 = new BankAccountWithDestruct("111", "Alice", 100);
+        $acc2 = new BankAccountWithDestruct("222", "Bob", 200);
+        $acc3 = new BankAccountWithDestruct("333", "Charlie", 300);
+
+        echo "<br>Accounts in registry: " . BankAccountWithDestruct::count() . "<br><br>";
+
+        echo "Closing Bob's account...<br>";
+        $acc2->close();
+        unset($acc2);
+
+        echo "<br>Accounts remaining: " . BankAccountWithDestruct::count() . "<br>";
+        foreach (BankAccountWithDestruct::findAll() as $account) {
+            echo $account . "<br>";
+        }
+        ?>
+    </div>
+
+    <p><strong>Why do we need close()?</strong> PHP only calls <code>__destruct()</code> when <em>all</em> references to an object are gone. Since the static array holds a reference, we must remove it from the array first. Then <code>unset()</code> removes the last reference and triggers <code>__destruct()</code>.</p>
+
+        <!-- Example 5 -->
     <h2>Using the v3 Classes</h2>
     <p>The v3 folder contains <code>BankAccount</code> with static members for tracking all accounts.</p>
     <pre><code class="language-php">require_once __DIR__ . '/classes/v3/SavingsAccount.php';
