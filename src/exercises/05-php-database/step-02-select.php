@@ -52,6 +52,35 @@ catch (PDOException $e) {
             // 2. Fetch all results
             // 3. Display count
             // 4. Create HTML table with the results
+            try {
+                $stmt = $db->query("SELECT * FROM books ORDER BY title");
+                $books = $stmt->fetchAll();
+
+                echo "<p>Found " . count($books) . " books</p>";
+                ?>
+                <table>
+                    <thead>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($books as $b) {
+                            echo "<tr>";
+                            echo "<td>" . $b['title'] . "</td>";
+                            echo "<td>" . $b['author'] . "</td>";
+                            echo "<td>" . $b['year'] . "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <?php
+            }
+            catch (Exception $e) {
+                echo "Connection Error: " . $e->getMessage();
+            }
             ?>
         </div>
     </div>
