@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git mv index.php game_list.php)"
+    ]
+  }
+}
