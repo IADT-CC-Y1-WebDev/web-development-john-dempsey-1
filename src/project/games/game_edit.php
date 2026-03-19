@@ -20,7 +20,7 @@ try {
         throw new Exception("Game not found.");
     }
 
-    $gamePlatforms = Platform::findByGame($game->id);
+    $gamePlatforms = $game->platforms();
     $gamePlatformsIds = [];
     foreach ($gamePlatforms as $platform) {
         $gamePlatformsIds[] = $platform->id;
@@ -31,7 +31,7 @@ try {
 }
 catch (PDOException $e) {
     setFlashMessage('error', 'Error: ' . $e->getMessage());
-    redirect('/index.php');
+    redirect('/game_list.php');
 }
 ?>
 <!DOCTYPE html>
@@ -45,11 +45,11 @@ catch (PDOException $e) {
             <div class="width-12">
                 <?php require 'php/inc/flash_message.php'; ?>
             </div>
-            <div class="width-12">
+            <div class="width-12 header">
                 <h1>Edit Game</h1>
             </div>
             <div class="width-12">
-                <form action="game_update.php" method="POST" enctype="multipart/form-data">
+                <form action="game_update.php" method="POST" enctype="multipart/form-data" novalidate>
                     <div class="input">
                         <input type="hidden" name="id" value="<?= h($game->id) ?>">
                     </div>
@@ -61,7 +61,7 @@ catch (PDOException $e) {
                         </div>
                     </div>
                     <div class="input">
-                        <label class="special" for="release_date">Release Year:</label>
+                        <label class="special" for="release_date">Release Date:</label>
                         <div>
                             <input type="date" id="release_date" name="release_date" value="<?= old('release_date', $game->release_date) ?>" required>
                             <p><?= error('release_date') ?></p>
@@ -114,7 +114,7 @@ catch (PDOException $e) {
                     </div>
                     <div class="input">
                         <button class="button" type="submit">Update Game</button>
-                        <div class="button"><a href="index.php">Cancel</a></div>
+                        <div class="button"><a href="game_list.php">Cancel</a></div>
                     </div>
                 </form>
             </div>

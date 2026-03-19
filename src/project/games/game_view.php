@@ -14,7 +14,7 @@ try {
     }
 
     $genre = Genre::findById($game->genre_id);
-    $platforms = Platform::findByGame($game->id);
+    $platforms = $game->platforms();
 
     $platformNames = [];
     foreach ($platforms as $platform) {
@@ -23,7 +23,7 @@ try {
 } 
 catch (PDOException $e) {
     setFlashMessage('error', 'Error: ' . $e->getMessage());
-    redirect('/index.php');
+    redirect('/game_list.php');
 }
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ catch (PDOException $e) {
     </head>
     <body>
         <div class="container">
-            <div class="width-12 header">
+            <div class="width-12">
                 <?php require 'php/inc/flash_message.php'; ?>
             </div>
         </div>
@@ -47,7 +47,7 @@ catch (PDOException $e) {
                         <div class="actions">
                             <a href="game_edit.php?id=<?= h($game->id) ?>">Edit</a> /
                             <a href="game_delete.php?id=<?= h($game->id) ?>">Delete</a> /
-                            <a href="index.php">Back</a>
+                            <a href="game_list.php">Back</a>
                         </div>
                     </div>
 

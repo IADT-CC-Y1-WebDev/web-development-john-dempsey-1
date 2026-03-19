@@ -62,7 +62,7 @@ try {
     setFlashMessage('success', 'Game deleted successfully.');
 
     // Redirect to game details page
-    redirect('index.php');
+    redirect('game_list.php');
 }
 catch (Exception $e) {
     // Set error flash message
@@ -77,6 +77,6 @@ catch (Exception $e) {
         redirect('game_view.php?id=' . $data['id']);
     }
     else {
-        redirect('index.php');
+        redirect('game_list.php');
     }
 }

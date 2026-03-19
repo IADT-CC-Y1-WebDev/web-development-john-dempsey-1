@@ -96,14 +96,8 @@ try {
     // Save to database
     $game->save();
 
-    // Delete existing platform associations
-    GamePlatform::deleteByGame($game->id);
-    // Create new platform associations
-    if (!empty($data['platform_ids']) && is_array($data['platform_ids'])) {
-        foreach ($data['platform_ids'] as $platformId) {
-            GamePlatform::create($game->id, $platformId);
-        }
-    }
+    // Sync platform associations
+    GamePlatform::sync('game_id', $game->id, $data['platform_ids']);
 
     // Clear any old form data
     clearFormData();
@@ -134,6 +128,6 @@ catch (Exception $e) {
         redirect('game_edit.php?id=' . $data['id']);
     }
     else {
-        redirect('index.php');
+        redirect('game_list.php');
     }
 }

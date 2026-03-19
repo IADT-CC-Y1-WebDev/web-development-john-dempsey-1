@@ -49,13 +49,21 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    // All validation passed - now process and save
     // Verify genre exists
     $genre = Genre::findById($data['genre_id']);
     if (!$genre) {
         throw new Exception('Selected genre does not exist.');
     }
 
+    // Verify platforms exist
+    foreach ($data['platform_ids'] as $platformId) {
+        $platform = Platform::findById($platformId);
+        if (!$platform) {
+            throw new Exception('One or more selected platforms do not exist.');
+        }
+    }
+
+    // All validation passed - now process and save
     // Process the uploaded image (validation already completed)
     $uploader = new ImageUpload();
     $imageFilename = $uploader->process($_FILES['image']);
@@ -75,14 +83,7 @@ try {
     // Save to database
     $game->save();
     // Create platform associations
-    if (!empty($data['platform_ids']) && is_array($data['platform_ids'])) {
-        foreach ($data['platform_ids'] as $platformId) {
-            // Verify platform exists before creating relationship
-            if (Platform::findById($platformId)) {
-                GamePlatform::create($game->id, $platformId);
-            }
-        }
-    }
+    GamePlatform::sync('game_id', $game->id, $data['platform_ids']);
 
     // Clear any old form data
     clearFormData();
