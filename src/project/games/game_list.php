@@ -43,14 +43,20 @@ catch (PDOException $e) {
                                 <?php } ?>
                             </select>
                         </div>
-                        <div>
-                            <label for="platform_filter">Platform:</label>
-                            <select id="platform_filter" name="platform_filter">
-                                <option value="">All Platforms</option>
-                                <?php foreach ($platforms as $platform) { ?>
-                                    <option value="<?= h($platform->id) ?>"><?= h($platform->name) ?></option>
-                                <?php } ?>
-                            </select>
+                        <div class="platform-dropdown-wrapper">
+                            <button type="button" id="platform_dropdown_toggle">Platforms</button>
+                            <div class="platform-dropdown-panel" id="platform_dropdown_panel">
+                                <div class="platform-checkboxes" id="platform_filter">
+                                    <?php foreach ($platforms as $platform) { ?>
+                                        <label class="platform-tri-checkbox"
+                                            data-platform-id="<?= h($platform->id) ?>"
+                                            data-state="0">
+                                            <input type="checkbox" class="platform-checkbox-input">
+                                            <?= h($platform->name) ?>
+                                        </label>
+                                    <?php } ?>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <label for="sort_by">Sort:</label>
@@ -90,6 +96,14 @@ catch (PDOException $e) {
                             <div class="top-content">
                                 <h2>Title: <?= h($game->title) ?></h2>
                                 <p>Release Year: <?= h($game->release_date) ?></p>
+                                <p>Genre: <?= h($game->genre()->name) ?></p>
+                                <p>Platforms: 
+                                    <?php 
+                                    $platformNames = array_map(function($platform) {
+                                        return h($platform->name);
+                                    }, $platforms);
+                                    echo implode(', ', $platformNames);
+                                    ?>
                             </div>
                             <div class="bottom-content">
                                 <img src="images/<?= h($game->image_filename) ?>" alt="Image for <?= h($game->title) ?>" />

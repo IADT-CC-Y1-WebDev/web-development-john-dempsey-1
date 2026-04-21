@@ -194,3 +194,100 @@ form {
 	color: #252525;
 	font-weight: 900;
 }
+
+.platform-dropdown-wrapper {
+    position: relative;
+}
+
+#platform_dropdown_toggle {
+    min-width: 160px;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+#platform_dropdown_toggle::after {
+    content: '▾';
+    font-size: 14px;
+}
+
+.platform-dropdown-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 220px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.platform-dropdown-panel.open {
+    display: block;
+}
+
+.platform-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Hide the native checkbox — keep it in the DOM for accessibility */
+.platform-checkbox-input {
+    appearance: none;
+    -webkit-appearance: none;
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Label row: custom box + platform name */
+.platform-tri-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #444;
+    padding: 2px 0;
+}
+
+/* State 0: empty box */
+.platform-tri-checkbox::before {
+    content: '';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #aaa;
+    border-radius: 3px;
+    background-color: #fff;
+    flex-shrink: 0;
+    font-size: 11px;
+    color: #fff;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* State 1: Include — green tick */
+.platform-tri-checkbox[data-state="1"]::before {
+    content: '✓';
+    background-color: #1a7a1a;
+    border-color: #4bff3c;
+}
+
+/* State 2: Exclude — red cross */
+.platform-tri-checkbox[data-state="2"]::before {
+    content: '✗';
+    background-color: #8b0000;
+    border-color: #ff4c4c;
+}
