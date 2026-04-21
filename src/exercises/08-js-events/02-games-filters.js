@@ -83,5 +83,20 @@ function getFilters() {
 }
 
 function clearFilters() {
-    console.log("Clearing filters");
+    // console.log("Clearing filters");
+    form.reset();
+
+    // for (let i = 0; i != cards.length; i++) {
+    //     let card = cards[i];
+    //     card.classList.remove('hidden');
+    // }
+    cards.forEach(function (card) {
+        card.classList.remove('hidden');
+    });
+
+    let cardsArray = Array.from(cards);
+    const sorted = sortCards(cardsArray, "title");
+    sorted.forEach(card => {
+        cardsContainer.appendChild(card);
+    }); 
 }
