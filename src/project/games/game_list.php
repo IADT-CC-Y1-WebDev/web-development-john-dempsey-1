@@ -29,7 +29,7 @@ catch (PDOException $e) {
             </div>
             <?php if (!empty($games)) { ?>
                 <div class="width-12 filters">
-                    <form>
+                    <form id="game_filters">
                         <div>
                             <label for="title_filter">Title:</label>
                             <input type="text" id="title_filter" name="title_filter">
@@ -53,6 +53,14 @@ catch (PDOException $e) {
                             </select>
                         </div>
                         <div>
+                            <label for="sort_by">Sort:</label>
+                            <select id="sort_by" name="sort_by">
+                                <option value="title_asc">Title A–Z</option>
+                                <option value="release_date_desc">Year (newest first)</option>
+                                <option value="release_date_asc">Year (oldest first)</option>
+                            </select>
+                        </div>
+                        <div>
                             <button type="button" id="apply_filters">Apply Filters</button>
                             <button type="button" id="clear_filters">Clear Filters</button>
                         </div>
@@ -65,8 +73,20 @@ catch (PDOException $e) {
                 <p>No games found.</p>
             <?php } else { ?>
                 <div class="width-12 cards">
-                    <?php foreach ($games as $game) { ?>
-                        <div class="card">
+                    <?php 
+                    foreach ($games as $game) { 
+                        $platforms = $game->platforms();
+                        $platformIds = array_map(function($platform) {
+                            return h($platform->id);
+                        }, $platforms);
+                        $platformIdsString = implode(',', $platformIds);
+                    ?>
+                        <div class="card" 
+                             data-title="<?= h($game->title) ?>" 
+                             data-genre="<?= h($game->genre_id) ?>" 
+                             data-release-date="<?= h($game->release_date) ?>"
+                             data-platforms="<?= $platformIdsString ?>"
+                        >
                             <div class="top-content">
                                 <h2>Title: <?= h($game->title) ?></h2>
                                 <p>Release Year: <?= h($game->release_date) ?></p>
@@ -85,4 +105,5 @@ catch (PDOException $e) {
             <?php } ?>
         </div>
     </body>
+    <script src="js/game_filters.js"></script>
 </html>
