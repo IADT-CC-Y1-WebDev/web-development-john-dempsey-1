@@ -43,21 +43,13 @@ catch (PDOException $e) {
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="platform-dropdown-wrapper">
-                            <button type="button" id="platform_dropdown_toggle">Platforms</button>
-                            <div class="platform-dropdown-panel" id="platform_dropdown_panel">
-                                <div class="platform-checkboxes" id="platform_filter">
-                                    <?php foreach ($platforms as $platform) { ?>
-                                        <label class="platform-tri-checkbox"
-                                            data-platform-id="<?= h($platform->id) ?>"
-                                            data-state="0">
-                                            <input type="checkbox" class="platform-checkbox-input">
-                                            <?= h($platform->name) ?>
-                                        </label>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
+                        <tri-state-dropdown label="Platforms">
+                            <?php foreach ($platforms as $platform) { ?>
+                                <tri-state-checkbox value="<?= h($platform->id) ?>">
+                                    <?= h($platform->name) ?>
+                                </tri-state-checkbox>
+                            <?php } ?>
+                        </tri-state-dropdown>
                         <div>
                             <label for="sort_by">Sort:</label>
                             <select id="sort_by" name="sort_by">
@@ -119,5 +111,7 @@ catch (PDOException $e) {
             <?php } ?>
         </div>
     </body>
+    <script src="js/tri-state-checkbox.js"></script>
+    <script src="js/tri-state-dropdown.js"></script>
     <script src="js/game_filters.js"></script>
 </html>
